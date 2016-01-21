@@ -207,6 +207,7 @@ func TestBadSchemaHttps(t *testing.T) {
 		t.Errorf("Error setting environment for Heroku Redis - %s", err.Error())
 	}
 	_, err = Init()
+
 	if err.Error() != "herokuredis : wrong database connection string schema - https" {
 		t.Errorf("Bad error response - %s", err.Error())
 	}

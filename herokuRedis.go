@@ -17,8 +17,8 @@ import (
 // 'REDISGREEN_URL', //https://devcenter.heroku.com/articles/redisgreen#using-redis-with-node-js
 // 'REDIS_URL' //https://devcenter.heroku.com/articles/heroku-redis#connecting-in-node-js
 func Init(overrideRedisConnectionString ...string) (*redis.Client, error) {
-	redisConnectionURL := "redis://:@localhost:6379/"
-	extractedConnectionString := ""
+	extractedConnectionString := "redis://:@localhost:6379/"
+	var currentConnectionString string
 	knownProviders := []string{
 		"REDISTOGO_URL",
 		"OPENREDIS_URL",
@@ -26,40 +26,34 @@ func Init(overrideRedisConnectionString ...string) (*redis.Client, error) {
 		"REDISGREEN_URL",
 		"REDIS_URL",
 	}
-	duplicateConnectionStrings := []string{}
-	for _, v := range knownProviders {
-		extractedConnectionString = os.Getenv(v)
-
-		if extractedConnectionString != "" {
-			duplicateConnectionStrings = append(duplicateConnectionStrings, v)
+	switch len(overrideRedisConnectionString) {
+	case 0:
+		duplicateConnectionStrings := []string{}
+		for _, v := range knownProviders {
+			currentConnectionString = os.Getenv(v)
+			if currentConnectionString != "" {
+				duplicateConnectionStrings = append(duplicateConnectionStrings, v)
+				if len(duplicateConnectionStrings) > 1 {
+					return nil, fmt.Errorf("goherokuredis : Duplicate redis connection extracted %s", duplicateConnectionStrings)
+				}
+				extractedConnectionString = currentConnectionString
+			}
 		}
+		break
+	case 1:
+		extractedConnectionString = overrideRedisConnectionString[0]
+		break
 
-		if len(duplicateConnectionStrings) > 1 {
-			return nil, fmt.Errorf("goherokuredis : Duplicate redis connection extracted %s", duplicateConnectionStrings)
-		}
-	}
-
-	if extractedConnectionString == "" {
-		extractedConnectionString = redisConnectionURL
-	}
-
-	if len(overrideRedisConnectionString) > 1 {
+	default:
 		return nil, fmt.Errorf("goherokuredis : Multiple connection override strings")
 	}
-
-	if len(overrideRedisConnectionString) == 1 {
-		extractedConnectionString = overrideRedisConnectionString[0]
-	}
-
 	connectionParameters, err := url.Parse(extractedConnectionString)
 	if err != nil {
 		return nil, err
 	}
-
 	if connectionParameters.Scheme != "redis" {
 		return nil, fmt.Errorf("herokuredis : wrong database connection string schema - %s", connectionParameters.Scheme)
 	}
-
 	passwd := ""
 	userAndPasswd := connectionParameters.User
 	if userAndPasswd != nil {
