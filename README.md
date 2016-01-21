@@ -20,6 +20,7 @@ connection parameters being used at Heroku. Currently - these environment variab
 
 if all of this environment values are empty, the default connection string is being used - `redis://:@localhost:6379` - that is equal to 
 connecting to 6373 port of localhost without password - stack settings for running Redis server on localost
+Also it is possible to override default setting by providing argument to `Init()` function.
 
 Basic usage
 =================================
@@ -49,8 +50,38 @@ Basic usage
 			fmt.Printf("Redis on %s is online!\n", redisClient.String())
 		}
 
+```
+
+Override default connection string
+=============================
+Let us assume your development PC use redis database at `redis.local` server
+
+```go 
+
+		package main
+		
+		import (
+			"fmt"
+		
+			"github.com/vodolaz095/goherokuredis"
+		)
+		
+		func main() {
+			redisClient, err := goherokuredis.Init("redis://usernameIgnored:authPassword@redis.local:6379/")
+		
+			if err != nil {
+				panic(err)
+			}
+		
+			err = redisClient.Ping().Err()
+			if err != nil {
+				panic(err)
+			}
+			fmt.Printf("Redis on %s is online!\n", redisClient.String())
+		}
 
 ```
+
 
 
 Usage as part of webserver
