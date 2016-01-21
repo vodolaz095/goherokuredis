@@ -17,7 +17,7 @@ import (
 // 'REDISGREEN_URL', //https://devcenter.heroku.com/articles/redisgreen#using-redis-with-node-js
 // 'REDIS_URL' //https://devcenter.heroku.com/articles/heroku-redis#connecting-in-node-js
 func Init(overrideRedisConnectionString ...string) (*redis.Client, error) {
-	redisConnectionUrl := "redis://:@localhost:6379/"
+	redisConnectionURL := "redis://:@localhost:6379/"
 	extractedConnectionString := ""
 	knownProviders := []string{
 		"REDISTOGO_URL",
@@ -35,16 +35,16 @@ func Init(overrideRedisConnectionString ...string) (*redis.Client, error) {
 		}
 
 		if len(duplicateConnectionStrings) > 1 {
-			return nil, fmt.Errorf("goherokuredis : Duplicate redis connection extracted %s!", duplicateConnectionStrings)
+			return nil, fmt.Errorf("goherokuredis : Duplicate redis connection extracted %s", duplicateConnectionStrings)
 		}
 	}
 
 	if extractedConnectionString == "" {
-		extractedConnectionString = redisConnectionUrl
+		extractedConnectionString = redisConnectionURL
 	}
 
 	if len(overrideRedisConnectionString) > 1 {
-		return nil, fmt.Errorf("goherokuredis : Multiple connection override strings!")
+		return nil, fmt.Errorf("goherokuredis : Multiple connection override strings")
 	}
 
 	if len(overrideRedisConnectionString) == 1 {

@@ -227,7 +227,7 @@ func TestDuplicateConnectionStrings(t *testing.T) {
 	}
 
 	_, err = Init()
-	if err.Error() != "goherokuredis : Duplicate redis connection extracted [REDISGREEN_URL REDIS_URL]!" {
+	if err.Error() != "goherokuredis : Duplicate redis connection extracted [REDISGREEN_URL REDIS_URL]" {
 		t.Error(err)
 	}
 
@@ -274,7 +274,7 @@ func TestBadOverrideConnectionString(t *testing.T) {
 		t.Errorf("Error setting environment for Heroku Redis - %s", err.Error())
 	}
 	_, err = Init("redis://herokuredis:@localhost:6379/", "redis://herokuredis:@otherhost.com:6379/")
-	if err.Error() != "goherokuredis : Multiple connection override strings!" {
+	if err.Error() != "goherokuredis : Multiple connection override strings" {
 		t.Error(err)
 	}
 
