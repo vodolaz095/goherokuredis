@@ -107,7 +107,7 @@ Usage as part of webserver
 
 ```
 
-
+You can see example here (https://goherokuredis.herokuapp.com/)[https://goherokuredis.herokuapp.com/]
 
 License
 =================================
