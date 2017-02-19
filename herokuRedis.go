@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"os"
 
-	"gopkg.in/redis.v3"
+	"gopkg.in/redis.v5"
 )
 
 //Init returns ready to use redis client
