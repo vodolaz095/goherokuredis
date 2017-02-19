@@ -3,6 +3,8 @@ GoHerokuRedis
 
 [![GoDoc](https://godoc.org/github.com/vodolaz095/goherokuredis?status.svg)](https://godoc.org/github.com/vodolaz095/goherokuredis)
 [![Build Status](https://travis-ci.org/vodolaz095/goherokuredis.svg?branch=master)](https://travis-ci.org/vodolaz095/goherokuredis)
+[![Go Report Card](https://goreportcard.com/badge/github.com/vodolaz095/goherokuredis)](https://goreportcard.com/report/github.com/vodolaz095/goherokuredis)
+
 
 Simple helper for Golang web applications for automaticaly configuring [Redis server](http://redis.io) clients by
 extracting connection string from environment parameters on [Heroku](http://heroku.com/) hosting.
