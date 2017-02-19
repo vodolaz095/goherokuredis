@@ -7,6 +7,26 @@ GoHerokuRedis
 Simple helper for Golang web applications for automaticaly configuring [Redis server](http://redis.io) clients by
 extracting connection string from environment parameters on [Heroku](http://heroku.com/) hosting.
 
+
+How to install
+=================================
+
+```shell
+
+go get gopkg.in/vodolaz095/goherokuredis.v1
+go get gopkg.in/vodolaz095/goherokuredis.v2
+go get gopkg.in/vodolaz095/goherokuredis.v3
+go get gopkg.in/vodolaz095/goherokuredis.v4
+go get gopkg.in/vodolaz095/goherokuredis.v5
+
+```
+
+Version has one to one relation of versions of recommended redis client being used.
+[https://github.com/go-redis/redis](https://github.com/go-redis/redis)
+
+So, for example, `gopkg.in/vodolaz095/goherokuredis.v5` is linked to `gopkg.in/redis.v5`
+
+
 How it works
 =================================
 This module inspects environment values for well known Redis-As-A-Service
@@ -33,7 +53,7 @@ Basic usage
 		import (
 			"fmt"
 		
-			"github.com/vodolaz095/goherokuredis"
+			"gopkg.in/vodolaz095/goherokuredis.v5"
 		)
 		
 		func main() {
@@ -63,7 +83,7 @@ Let us assume your development PC use redis database at `redis.local` server
 		import (
 			"fmt"
 		
-			"github.com/vodolaz095/goherokuredis"
+			"gopkg.in/vodolaz095/goherokuredis.v5"
 		)
 		
 		func main() {
