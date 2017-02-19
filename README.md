@@ -13,8 +13,6 @@ How to install
 
 ```shell
 
-go get gopkg.in/vodolaz095/goherokuredis.v1
-go get gopkg.in/vodolaz095/goherokuredis.v2
 go get gopkg.in/vodolaz095/goherokuredis.v3
 go get gopkg.in/vodolaz095/goherokuredis.v4
 go get gopkg.in/vodolaz095/goherokuredis.v5
@@ -25,6 +23,8 @@ Version has one to one relation of versions of recommended redis client being us
 [https://github.com/go-redis/redis](https://github.com/go-redis/redis)
 
 So, for example, `gopkg.in/vodolaz095/goherokuredis.v5` is linked to `gopkg.in/redis.v5`
+
+Warning - v3 do not works on Go 1.4. Sorry.
 
 
 How it works
